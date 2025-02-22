@@ -7,12 +7,13 @@ export interface Artwork {
   style: string;
   technique: string;
   location: string;
-  image: string;
+  coverImage: string;
+  images?: string[];
   curiosities: string[];
   priceHistory: {
     firstSale: string;
     resale: string;
   };
   quote: string;
-  description: string;
+  description: { text: string; image?: string }[]; // Alterado para array de objetos
 }

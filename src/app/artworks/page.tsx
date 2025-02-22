@@ -18,7 +18,7 @@ function ArtworksPage() {
               {/* Imagem */}
               <div className="w-full h-64 flex items-center justify-center ">
                 <Image
-                  src={artwork.image}
+                  src={artwork.coverImage}
                   width={300}
                   height={400} // Mantemos um valor maior para suportar obras verticais
                   alt={artwork.title}
