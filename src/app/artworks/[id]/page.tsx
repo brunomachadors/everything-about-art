@@ -49,7 +49,7 @@ export default function ArtworkPage() {
       <Artwork artworkInfo={artwork} />
 
       {/* Descrição Ajustada */}
-      <div className="w-full max-w-3xl p-6 md:p-8 lg:p-10 text-gray-300">
+      <div className="w-full max-w-3xl p-6 md:p-8 lg:p-10 ">
         <p className="text-lg">{artwork.description}</p>
       </div>
 

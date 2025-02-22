@@ -20,7 +20,7 @@ function Artwork({ artworkInfo }: ArtworkProps) {
       </div>
 
       {/* Informações da Obra */}
-      <div className="w-full md:w-1/2 space-y-4 text-gray-300">
+      <div className="w-full md:w-1/2 space-y-4 ">
         <p className="text-lg">
           <strong>🎨 Autor:</strong> {artworkInfo.author}
         </p>
