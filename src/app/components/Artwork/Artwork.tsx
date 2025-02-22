@@ -11,7 +11,7 @@ function Artwork({ artworkInfo }: ArtworkProps) {
       {/* Imagem da Obra */}
       <div className="w-full md:w-1/2 flex justify-center">
         <Image
-          src={artworkInfo.image}
+          src={artworkInfo.coverImage}
           width={1000}
           height={1000}
           alt={`Obra: ${artworkInfo.title}`}
