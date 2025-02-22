@@ -127,26 +127,23 @@ export const artworks: Artwork[] = [
 
     description: [
       {
-        text: 'O Zé Povinho foi inventado pelo artista português Rafael Bordalo Pinheiro em 1875 para representar o povo português.',
+        text: 'O Zé Povinho foi inventado pelo artista português Rafael Bordalo Pinheiro em 1875 para representar o povo português. É conhecido pelo seu famoso gesto, o “Toma!”. Ele fê-lo porque estava chateado com os políticos, indignado com a sociedade e com os impostos que pagava. Como ele é analfabeto, e não sabe ler nem escrever, para demonstrar que estava chateado, fez este gesto.',
       },
       {
-        text: 'Ele é conhecido pelo seu famoso gesto, o “Toma!”, que simboliza sua revolta contra os políticos, a sociedade e os impostos abusivos.',
-      },
-      {
-        text: 'Uma das suas primeiras aparições foi no Álbum das Glórias, onde era representado como um homem ingênuo e resignado, aceitando as injustiças impostas pelos governantes.',
-      },
-      {
-        text: 'A albarda ao seu lado simboliza os encargos, impostos e abusos políticos, colocando o Zé Povinho na posição de um burro sobrecarregado.',
+        text: 'Eis como ele é numa foto do Álbum das Glórias. Era ingénuo, indiferente, aceitava tudo e ainda se ria, como o povo na altura. A albarda ao lado dele simboliza todos os encargos, impostos e malfeitorias que os políticos colocavam às costas do Zé Povinho, como se de um burro se tratasse. A legenda “O Soberano!” é para demonstrar que o povo é que manda no país, e não o rei.',
         image:
           'https://res.cloudinary.com/dtglidvcw/image/upload/v1740223972/everythingAboutArt/artworks/lanternamagica2.png',
       },
       {
-        text: 'Sua estreia na imprensa aconteceu em 12 de junho de 1875 na revista "A Lanterna Mágica".',
+        text: 'Esta é a primeira caricatura onde apareceu o Zé Povinho, A Lanterna Mágica, a 12 de Junho de 1875, véspera de Santo António. Aqui, o ministro das finanças, Serpa Pimentel, está a pedir três tostões ao Zé Povinho para o Santo António de Lisboa, cuja cara é, na verdade, Fontes Pereira de Melo, o chefe do governo, e o bebé ao colo tem a cara do rei da altura, D. Luís I. O guarda com o chicote está pronto para se zangar com ele caso não pague. Com esta caricatura pode concluir-se que o rei e o governo tiravam o dinheiro ao povo por tudo e por nada.',
       },
       {
-        text: 'O Zé Povinho ganhou notoriedade internacional, sendo reconhecido além das fronteiras de Portugal. Em uma caricatura chamada "A Situação", ele aparece representando o povo português enquanto carrega um fardo nas costas.',
+        text: 'O Zé Povinho também era conhecido no resto do mundo, como se pode ver nesta caricatura de nome “A Situação”. Esta goza com os interesses ingleses que mandam mais em Portugal do que o próprio rei português. O rei está a dormir sem querer saber de nada, e ao seu lado está John Bull, o símbolo do povo inglês, tal como o Zé Povinho era o símbolo do povo português.',
         image:
           'https://res.cloudinary.com/dtglidvcw/image/upload/v1740223126/everythingAboutArt/artworks/thesituation.jpg',
+      },
+      {
+        text: 'Consegue-se ver que as bandeiras inglesas têm mais peso do que a bandeira portuguesa, o que é sinal do poder que o Reino Unido tinha sobre nós. Além do Fontes Pereira de Melo, mencionado na caricatura anterior, também vemos o novo primeiro-ministro, Rodrigues Sampaio, a apresentar o ministério ao rei. Há vários políticos montados a cavalo e o burro, neste caso, é o Zé. Ele carrega todas aquelas albardas porque o governo estava sempre a mudar e o povo, representado pelo Zé, é que sofria. O Fontes Pereira de Melo está a manipular a apresentação deste novo ministério com outra albarda que simboliza outra proposta já com os seus apoiantes. A coroa que ele tem na cabeça não é de rei, mas representa o poder que ele tinha.',
       },
       {
         text: 'Além de suas caricaturas, Rafael Bordalo Pinheiro também imortalizou o Zé Povinho na cerâmica, criando estátuas que reforçavam a crítica social.',
