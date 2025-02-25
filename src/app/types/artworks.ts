@@ -2,7 +2,7 @@ export interface Artwork {
   id: string;
   title: string;
   author: string;
-  year: number;
+  year: number | string;
   country: string;
   style: string;
   technique: string;

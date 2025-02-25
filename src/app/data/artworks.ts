@@ -157,4 +157,159 @@ export const artworks: Artwork[] = [
       resale: 'Desconhecido',
     },
   },
+  {
+    id: 'trou-de-la-serrure-amadeo-de-souza-cardoso',
+    title: 'Parto da Viola',
+    author: 'Amadeo de Souza-Cardoso',
+    year: 1916,
+    country: 'Portugal',
+    style: 'Modernismo, Cubismo, Expressionismo',
+    technique: 'Óleo sobre tela',
+    location: 'Museu do Chiado, Lisboa, Portugal',
+    coverImage:
+      'https://res.cloudinary.com/dtglidvcw/image/upload/v1740477744/everythingAboutArt/artworks/partodaviola.jpg',
+    images: [],
+    curiosities: [
+      'O título completo da obra é: "Trou de la Serrure, Parto da Viola, Bon Ménage, Fraise Avant-Garde".',
+      'O buraco da fechadura aparece ligeiramente à direita da viola.',
+      'A viola representada é uma viola-d’arco, com cordas e notas musicais espalhadas pela tela.',
+      'A referência a "boa casa" pode ser vista no chão de azulejos, nas jarras e na boneca à esquerda.',
+      'O "morango vanguarda" é representado por um morango visível no chão de azulejos.',
+      'Amadeo de Souza-Cardoso era conhecido por misturar várias técnicas inovadoras em suas obras.',
+      'Ele chegou a usar materiais como areia, ganchos de cabelo e pedaços de espelhos em algumas de suas pinturas.',
+      'Faleceu precocemente aos 30 anos, sem conseguir pintar todas as obras que idealizou.',
+    ],
+    quote:
+      'A beleza deste quadro é a quantidade de coisas que se podem experimentar. – Amadeo de Souza-Cardoso',
+    description: [
+      {
+        text: 'Esta obra é da autoria do pintor português Amadeo de Souza- Cardoso. O seu verdadeiro título é muito comprido: Trou de la serrure, parto da viola, bon ménage, fraise avant garde, o que significa: buraco da fechadura, parto da viola, boa casa, morango vanguarda.',
+      },
+      {
+        text: 'O buraco da fechadura aparece ligeiramente à direita da viola.',
+      },
+      {
+        text: 'A viola que aparece no quadro é uma viola-d’arco, pertencente à família do violino. As cordas e as notas estão espalhadas pela obra.',
+      },
+      {
+        text: 'A parte correspondente ao “morango vanguarda” é o morango que está no chão de azulejos.',
+      },
+      {
+        text: 'A beleza deste quadro é a quantidade de coisas que se podem experimentar.',
+      },
+      {
+        text: 'Amadeo de Souza-Cardoso era conhecido por pintar muitas coisas nunca antes vistas. Misturava muitas técnicas diferentes nas suas obras.',
+      },
+      {
+        text: 'Contudo, o pintor tinha outros quadros nos quais usava areia, ganchos de cabelo, pedaços de espelhos, entre outras coisas. Até parecia uma criança.',
+      },
+      {
+        text: 'A parte mais triste desta análise é que o pintor adoeceu e morreu com 30 anos e ainda não tinha pintado todos os quadros que queria. Se hoje fosse vivo, teria sido um dos mais talentosos de sempre.',
+      },
+    ],
+    priceHistory: {
+      firstSale: 'Desconhecido',
+      resale: 'Desconhecido',
+    },
+  },
+
+  {
+    id: 'mona-lisa-leonardo-da-vinci',
+    title: 'Mona Lisa',
+    author: 'Leonardo da Vinci',
+    year: 1503,
+    country: 'Itália',
+    style: 'Renascimento',
+    technique: 'Óleo sobre madeira',
+    location: 'Museu do Louvre, Paris, França',
+    coverImage:
+      'https://res.cloudinary.com/dtglidvcw/image/upload/v1740478115/everythingAboutArt/artworks/monalisa.jpg',
+    curiosities: [
+      'Leonardo da Vinci levou quatro anos para concluir a pintura.',
+      'A modelo do quadro foi Lisa del Giocondo, uma mulher da nobreza florentina.',
+      'A Mona Lisa não tem sobrancelhas devido à técnica sfumato utilizada por Leonardo.',
+      'O sorriso enigmático da Mona Lisa foi resultado da tentativa de Leonardo de fazê-la sorrir com a ajuda de bobos da corte.',
+      'A pintura já esteve no quarto do rei Francisco I, no de Luís XIV e até no de Napoleão Bonaparte.',
+      'Em 1911, foi roubada por Vincenzo Peruggia e recuperada apenas em 1913.',
+      'A pintura sofreu ataques com ácido e pedra, resultando na necessidade de proteção com vidro à prova de bala.',
+      'O olhar da Mona Lisa tem um efeito óptico que faz parecer que ela está sempre nos observando.',
+    ],
+    quote:
+      'O sorriso mais famoso da história da arte. – Descrição popular sobre a Mona Lisa',
+    description: [
+      {
+        text: `Esta obra é da autoria do pintor italiano Leonardo da Vinci e data de 1503. Já derreteu muitos corações ao longo da história: reis, imperadores, e até o coração do próprio pintor.`,
+      },
+      {
+        text: 'Leonardo procurava a perfeição e muitas vezes não terminava os seus quadros, mas este foi diferente. Leonardo demorou quatro anos a pintá-lo. Tinha 51 anos quando começou. Pediu a uma mulher chamada Lisa del Giocondo que posasse para ele. Ela demorou a decidir que roupa e jóias usar, e quando se decidiu, pôs um véu transparente porque tinha sido mãe há pouco tempo.',
+      },
+      {
+        text: 'No quadro, ela parece estar sentada numa varanda muito alta, com uma paisagem de natureza por trás. Mas a paisagem não é real, pois está mal alinhada.',
+      },
+      {
+        text: 'Se olharmos melhor, vemos que a Mona Lisa não tem sobrancelhas. Alguns acreditam que ela as rapou. Outros pensam que desapareceram num dos restauros que se fez à obra. Mas na verdade, isso faz parte de uma técnica usada pelo pintor conhecida como sfumato. Ele fazia pinceladas finas uma a uma usando pincéis de seda muito suaves para esbater o fumo, e fez isso nas sobrancelhas.',
+      },
+      {
+        text: 'Este quadro já esteve na casa de banho privada do rei Francisco I,pois ele adorava olhar para ela a sós. Comprou o quadro por uma quantia hoje equivalente a oitocentos mil euros. Em 1682, outro rei, Luís XIV, quis tê-la no seu quarto, para olhar para ela antes de dormir e ao acordar. Em 1800, Napoleão Bonaparte “raptou-a” para o seu quarto. Também ele se tinha apaixonado pela Mona Lisa. Depois disso, a partir de 1911, ela passou a ser vista aos olhos de todos no célebre Museu do Louvre, em Paris.',
+      },
+      {
+        text: 'Conquistou muitos corações, até que um dia o quadro desapareceu. Ninguém sabia onde estava. Foi Vincenzo Peruggia que tinha levado o quadro sem ninguém desconfiar. Reapareceu novamente no final de 1913 em Florença, quando Peruggia o tentou vender às galerias Uffizi. Ele achava que o quadro pertencia a Florença, pois Leonardo tinha-o pintado lá.',
+      },
+      {
+        text: 'Mas as peripécias não ficam por aqui, porque em 1956 alguém atirou ácido para o quadro. Quando acabaram de arranjar os estragos, outra pessoa atirou uma pedra e estragou a sombra do olho esquerdo da Mona Lisa. Depois disso, puseram-lhe um vidro à prova de bala para não haver mais acidentes.',
+      },
+      { text: 'Para terminar, o olhar da Mona Lisa parece que nos persegue.' },
+    ],
+    priceHistory: {
+      firstSale: '800 mil euros (valor ajustado)',
+      resale: 'Nunca foi vendida após a aquisição do Louvre',
+    },
+  },
+  {
+    id: 'triptico-auto-retrato-sonho-familia-paula-rego',
+    title: 'Tríptico Auto-retrato, Sonho e Família',
+    author: 'Paula Rego',
+    year: 'Desconhecido',
+    country: 'Portugal',
+    style: 'Expressionismo, Realismo Contemporâneo',
+    technique: 'Óleo sobre tela',
+    location: 'Desconhecido',
+    coverImage:
+      'https://res.cloudinary.com/dtglidvcw/image/upload/v1740480644/everythingAboutArt/artworks/triplo.png',
+    curiosities: [
+      'Paula Rego sempre se considerou uma mulher à frente do seu tempo.',
+      'A obra é composta por três partes que contam uma história em momentos distintos.',
+      'No primeiro quadro, a pintora se autorretrata com uma máscara de macaco, simbolizando a imitação.',
+      "O segundo quadro, 'Sonho', reflete sua saudade do filho mais novo que ficou em Portugal.",
+      "O terceiro quadro, 'Família', mostra a morte separando Paula e seu marido doente.",
+      'A obra transmite as dificuldades da artista em equilibrar sua vida como mãe, mulher e pintora.',
+    ],
+    quote:
+      'Quando estava contente, os quadros eram fortes e cheios de cor. Quando estava triste, fazia quadros confusos e estranhos. – Paula Rego',
+    description: [
+      {
+        text: 'Este tríptico é da autoria da pintora portuguesa Paula Rego. Desde cedo que a pintora sabia que era uma mulher à frente do seu tempo. Gostava de pensar em novas ideias e de pintar tudo o que sentia.',
+      },
+      {
+        text: 'Aqui está a obra. É uma história em três momentos. O primeiro é o Auto-retrato. Ela pintou-se a si própria. Tem uma máscara de macaco porque considerava que os pintores imitavam tudo o que viam, tal como os macacos. Neste caso, ela imita-se a si própria a pintar. A figura branca ao lado dela simboliza a morte e a doença. Tem uma máscara de pássaro com um bico comprido e óculos escuros por causa da Peste Negra, uma doença que matou muita gente.',
+        image:
+          'https://res.cloudinary.com/dtglidvcw/image/upload/v1740480333/everythingAboutArt/artworks/autoretrato.webp',
+      },
+      {
+        text: 'O segundo momento é o Sonho. A pintora tinha muitos pesadelos e sonhava com o filho mais novo que tinha deixado em Portugal quando foi estudar para a Inglaterra, com uma bolsa da Fundação Calouste Gulbenkian. Levou as duas filhas mais velhas, mas não pôde levar o mais novo, pois era muito pequeno e podia distraí-la enquanto pintava. Ela tem uma cera na mão, pois está contente por ser pintora, mas ao mesmo tempo está triste por não estar com o seu filho.',
+      },
+      {
+        text: 'O terceiro momento é a Família. Mostra a morte a querer separar a pintora do marido. Ele tinha uma doença grave e, pouco a pouco, começou a ter cada vez menos capacidade de fazer tudo sozinho. Paula Rego vivia triste, preocupada e cada vez mais distante. Houve uma altura em que o marido apanhou uma constipação da filha e não quis ser curado, deixando que a morte o levasse.',
+        image:
+          'https://res.cloudinary.com/dtglidvcw/image/upload/v1740480332/everythingAboutArt/artworks/familia.webp',
+      },
+      {
+        text: 'Paula continuou a pintar o que sentia. Quando estava contente, os quadros eram fortes e cheios de cor. Quando estava triste, fazia quadros confusos e estranhos. Por outras palavras, este tríptico mostra o quão era difícil para Paula ser mãe, mulher e pintora.',
+      },
+    ],
+    priceHistory: {
+      firstSale: 'Desconhecido',
+      resale: 'Desconhecido',
+    },
+  },
 ];
