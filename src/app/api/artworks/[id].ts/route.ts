@@ -1,35 +1,30 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+export async function GET(
+  req: Request,
+  { params }: { params: { id: string } }
 ) {
-  const { id } = req.query;
+  try {
+    const artwork = await prisma.artwork.findUnique({
+      where: { id: params.id },
+    });
 
-  if (req.method === 'GET') {
-    try {
-      const artwork = await prisma.artwork.findUnique({
-        where: { id: String(id) },
-      });
-
-      if (!artwork) {
-        return res.status(404).json({ error: 'Obra de arte não encontrada' });
-      }
-
-      return res.status(200).json(artwork);
-    } catch (error: unknown) {
-      console.error('Erro ao buscar a obra de arte:', error);
-
-      if (error instanceof Error) {
-        return res.status(500).json({ error: error.message });
-      }
-
-      return res.status(500).json({ error: 'Erro desconhecido' });
+    if (!artwork) {
+      return NextResponse.json(
+        { error: 'Obra de arte não encontrada' },
+        { status: 404 }
+      );
     }
-  }
 
-  return res.status(405).json({ error: 'Método não permitido' });
+    return NextResponse.json(artwork, { status: 200 });
+  } catch (error) {
+    console.error('Erro ao buscar a obra de arte:', error);
+    return NextResponse.json(
+      { error: 'Erro ao buscar a obra de arte' },
+      { status: 500 }
+    );
+  }
 }
