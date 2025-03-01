@@ -3,13 +3,17 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: Request) {
   try {
+    const url = new URL(request.url);
+    const id = url.pathname.split('/').pop();
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID não fornecido' }, { status: 400 });
+    }
+
     const artwork = await prisma.artwork.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!artwork) {
@@ -19,11 +23,11 @@ export async function GET(
       );
     }
 
-    return NextResponse.json(artwork, { status: 200 });
+    return NextResponse.json(artwork);
   } catch (error) {
     console.error('Erro ao buscar a obra de arte:', error);
     return NextResponse.json(
-      { error: 'Erro ao buscar a obra de arte' },
+      { error: 'Erro interno do servidor' },
       { status: 500 }
     );
   }
