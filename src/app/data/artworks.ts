@@ -192,6 +192,9 @@ export const artworks: Artwork[] = [
         text: 'A viola que aparece no quadro é uma viola-d’arco, pertencente à família do violino. As cordas e as notas estão espalhadas pela obra.',
       },
       {
+        text: 'A parte correspondente a “boa casa” é o chão de azulejos, as jarras e a boneca que aparecem à esquerda.',
+      },
+      {
         text: 'A parte correspondente ao “morango vanguarda” é o morango que está no chão de azulejos.',
       },
       {
