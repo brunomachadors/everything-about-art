@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { artworks } from '@/app/data/artworks';
 import Artwork from '@/app/components/Artwork/Artwork';
 import LoadingSpinner from '@/app/components/Loading/Loading';
@@ -54,10 +55,12 @@ export default function ArtworkPage() {
           <div key={index} className="mb-6">
             <p className="text-lg">{section.text}</p>
             {section.image && (
-              <img
+              <Image
                 src={section.image}
                 alt={`Imagem de ${artwork.title}`}
-                className="w-full mt-4 rounded-lg shadow-md"
+                width={800}
+                height={500}
+                className="rounded-lg shadow-md"
               />
             )}
           </div>
