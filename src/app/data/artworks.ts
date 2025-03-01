@@ -183,7 +183,7 @@ export const artworks: Artwork[] = [
       'A beleza deste quadro é a quantidade de coisas que se podem experimentar. – Amadeo de Souza-Cardoso',
     description: [
       {
-        text: 'Esta obra é da autoria do pintor português Amadeo de Souza- Cardoso. O seu verdadeiro título é muito comprido: Trou de la serrure, parto da viola, bon ménage, fraise avant garde, o que significa: buraco da fechadura, parto da viola, boa casa, morango vanguarda.',
+        text: 'Esta obra é da autoria do pintor português Amadeo de Souza-Cardoso. O seu verdadeiro título é muito comprido: Trou de la serrure, parto da viola, bon ménage, fraise avant garde, o que significa: buraco da fechadura, parto da viola, boa casa, morango vanguarda.',
       },
       {
         text: 'O buraco da fechadura aparece ligeiramente à direita da viola.',
@@ -250,15 +250,11 @@ export const artworks: Artwork[] = [
         text: 'Se olharmos melhor, vemos que a Mona Lisa não tem sobrancelhas. Alguns acreditam que ela as rapou. Outros pensam que desapareceram num dos restauros que se fez à obra. Mas na verdade, isso faz parte de uma técnica usada pelo pintor conhecida como sfumato. Ele fazia pinceladas finas uma a uma usando pincéis de seda muito suaves para esbater o fumo, e fez isso nas sobrancelhas.',
       },
       {
-        text: 'Este quadro já esteve na casa de banho privada do rei Francisco I,pois ele adorava olhar para ela a sós. Comprou o quadro por uma quantia hoje equivalente a oitocentos mil euros. Em 1682, outro rei, Luís XIV, quis tê-la no seu quarto, para olhar para ela antes de dormir e ao acordar. Em 1800, Napoleão Bonaparte “raptou-a” para o seu quarto. Também ele se tinha apaixonado pela Mona Lisa. Depois disso, a partir de 1911, ela passou a ser vista aos olhos de todos no célebre Museu do Louvre, em Paris.',
+        text: 'Agora vamos ao sorriso. Não parecia muito contente com a cor do vestido ou com as jóias que decidiu não usar, por isso, Leonardo contratou vários bobos da corte para a animar, embora só tenha resultado este sorriso cheio de mistérios, considerado o mais famoso da história da arte.',
       },
       {
-        text: 'Conquistou muitos corações, até que um dia o quadro desapareceu. Ninguém sabia onde estava. Foi Vincenzo Peruggia que tinha levado o quadro sem ninguém desconfiar. Reapareceu novamente no final de 1913 em Florença, quando Peruggia o tentou vender às galerias Uffizi. Ele achava que o quadro pertencia a Florença, pois Leonardo tinha-o pintado lá.',
+        text: 'Este quadro já esteve na casa de banho privada do rei Francisco I, pois ele adorava olhar para ela a sós. Comprou o quadro por uma quantia hoje equivalente a oitocentos mil euros. Em 1682, outro rei, Luís XIV, quis tê-la no seu quarto, para olhar para ela antes de dormir e ao acordar. Em 1800, Napoleão Bonaparte “raptou-a” para o seu quarto. Também ele se tinha apaixonado pela Mona Lisa. Depois disso, a partir de 1911, ela passou a ser vista aos olhos de todos no célebre Museu do Louvre, em Paris.',
       },
-      {
-        text: 'Mas as peripécias não ficam por aqui, porque em 1956 alguém atirou ácido para o quadro. Quando acabaram de arranjar os estragos, outra pessoa atirou uma pedra e estragou a sombra do olho esquerdo da Mona Lisa. Depois disso, puseram-lhe um vidro à prova de bala para não haver mais acidentes.',
-      },
-      { text: 'Para terminar, o olhar da Mona Lisa parece que nos persegue.' },
     ],
     priceHistory: {
       firstSale: '800 mil euros (valor ajustado)',
