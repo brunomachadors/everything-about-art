@@ -17,7 +17,7 @@ export default function Navbar() {
       </div>
 
       <div
-        className={`flex flex-col sm:flex-row sm:justify-center gap-6 text-2xl ${
+        className={`flex flex-col items-center sm:flex-row sm:justify-center gap-6 text-2xl ${
           isOpen ? 'block' : 'hidden'
         } sm:flex`}
       >
