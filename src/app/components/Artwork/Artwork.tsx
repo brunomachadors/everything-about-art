@@ -11,7 +11,7 @@ function Artwork({ artworkInfo }: ArtworkProps) {
       {/* Imagem da Obra */}
       <div className="w-full md:w-1/2 flex justify-center">
         <Image
-          src={artworkInfo.coverImage}
+          src={artworkInfo.image}
           width={1000}
           height={1000}
           alt={`Obra: ${artworkInfo.title}`}
@@ -22,30 +22,32 @@ function Artwork({ artworkInfo }: ArtworkProps) {
       {/* Informações da Obra */}
       <div className="w-full md:w-1/2 space-y-4 ">
         <p className="text-lg">
-          <strong>🎨 Autor:</strong> {artworkInfo.author}
+          <strong>🎨 Artista:</strong> {artworkInfo.artist}
         </p>
         <p className="text-lg">
-          <strong>📅 Ano:</strong> {artworkInfo.year}
+          <strong>📅 Ano:</strong> {artworkInfo.year ?? 'Desconhecido'}
         </p>
         <p className="text-lg">
-          <strong>🌍 País de Origem:</strong> {artworkInfo.country}
+          <strong>🌍 País de Origem:</strong> {artworkInfo.origin}
         </p>
         <p className="text-lg">
-          <strong>🖌️ Técnica:</strong> {artworkInfo.technique}
+          <strong>🖌️ Técnica:</strong> {artworkInfo.technique || 'Desconhecida'}
         </p>
         <p className="text-lg">
-          <strong>🏛️ Localização:</strong> {artworkInfo.location}
+          <strong>🏛️ Localização:</strong>{' '}
+          {artworkInfo.location || 'Desconhecida'}
         </p>
         <p className="text-lg">
           <strong>💰 Primeira Venda:</strong>{' '}
-          {artworkInfo.priceHistory.firstSale}
+          {artworkInfo.pricehistory?.firstSale || 'Desconhecido'}
         </p>
         <p className="text-lg">
-          <strong>📈 Última Revenda:</strong> {artworkInfo.priceHistory.resale}
+          <strong>📈 Última Revenda:</strong>{' '}
+          {artworkInfo.pricehistory?.resale || 'Desconhecido'}
         </p>
 
         <blockquote className="italic text-yellow-500 border-l-4 border-yellow-500 pl-4">
-          "{artworkInfo.quote}"
+          "{artworkInfo.quote || 'Sem citação disponível'}"
         </blockquote>
       </div>
     </div>

@@ -1,19 +1,18 @@
 export interface Artwork {
   id: string;
   title: string;
-  author: string;
-  year: number | string;
-  country: string;
-  style: string;
-  technique: string;
-  location: string;
-  coverImage: string;
+  artist: string;
+  year: number | null;
+  origin: string;
+  style: string | null;
+  technique: string | null;
+  location: string | null;
+  image: string;
   images?: string[];
+  tags: string[];
   curiosities: string[];
-  priceHistory: {
-    firstSale: string;
-    resale: string;
-  };
-  quote: string;
-  description: { text: string; image?: string }[]; // Alterado para array de objetos
+  pricehistory?: { firstSale: string; resale: string } | null;
+  quote?: string | null;
+  description: { text: string; image?: string }[];
+  createdat: Date;
 }
