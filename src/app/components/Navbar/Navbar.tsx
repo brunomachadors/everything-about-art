@@ -17,26 +17,50 @@ export default function Navbar() {
       </div>
 
       <div
-        className={`flex flex-col items-center sm:flex-row sm:justify-center gap-6 text-2xl ${
+        className={`flex flex-col justify-center items-center sm:flex-row sm:justify-center gap-6 text-2xl ${
           isOpen ? 'block' : 'hidden'
         } sm:flex`}
       >
-        <Link href="/" className="hover:text-yellow-500">
+        <Link
+          href="/"
+          className="hover:text-yellow-500"
+          onClick={() => setIsOpen(false)}
+        >
           HOME
         </Link>
-        <Link href="/artworks" className="hover:text-yellow-500">
+        <Link
+          href="/artworks"
+          className="hover:text-yellow-500"
+          onClick={() => setIsOpen(false)}
+        >
           OBRAS
         </Link>
-        <Link href="/artist" className="hover:text-yellow-500">
+        <Link
+          href="/artist"
+          className="hover:text-yellow-500"
+          onClick={() => setIsOpen(false)}
+        >
           ARTISTAS
         </Link>
-        <Link href="/museum" className="hover:text-yellow-500">
+        <Link
+          href="/museum"
+          className="hover:text-yellow-500"
+          onClick={() => setIsOpen(false)}
+        >
           MUSEUS
         </Link>
-        <Link href="/street-art" className="hover:text-yellow-500">
+        <Link
+          href="/street-art"
+          className="hover:text-yellow-500"
+          onClick={() => setIsOpen(false)}
+        >
           ARTE URBANA
         </Link>
-        <Link href="/about-us" className="hover:text-yellow-500">
+        <Link
+          href="/about-us"
+          className="hover:text-yellow-500"
+          onClick={() => setIsOpen(false)}
+        >
           SOBRE
         </Link>
       </div>
