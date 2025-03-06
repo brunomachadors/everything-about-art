@@ -3,26 +3,39 @@
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { artworks } from '@/app/data/artworks';
 import Artwork from '@/app/components/Artwork/Artwork';
 import LoadingSpinner from '@/app/components/Loading/Loading';
 import { Artwork as ArtworkType } from '@/app/types/artworks';
 
 export default function ArtworkPage() {
-  const params = useParams();
-  const artworkId = params.id;
+  const { id: artworkId } = useParams();
 
   const [artwork, setArtwork] = useState<ArtworkType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const foundArtwork = artworks.find((art) => art.id === artworkId);
-      setArtwork(foundArtwork || null);
-      setIsLoading(false);
-    }, 500);
+    async function fetchArtwork() {
+      try {
+        setIsLoading(true);
+        const response = await fetch(`/api/artworks/${artworkId}`);
 
-    return () => clearTimeout(timeout);
+        if (!response.ok) {
+          throw new Error('Obra de arte não encontrada.');
+        }
+
+        const data = await response.json();
+        setArtwork(data);
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    if (artworkId) {
+      fetchArtwork();
+    }
   }, [artworkId]);
 
   if (isLoading) {
@@ -33,9 +46,11 @@ export default function ArtworkPage() {
     );
   }
 
-  if (!artwork) {
+  if (error || !artwork) {
     return (
-      <div className="text-center text-yellow-500">Artwork not found.</div>
+      <div className="text-center text-yellow-500">
+        Obra de arte não encontrada.
+      </div>
     );
   }
 
