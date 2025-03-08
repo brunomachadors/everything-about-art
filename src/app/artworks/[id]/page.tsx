@@ -66,20 +66,24 @@ export default function ArtworkPage() {
 
       {/* Descrição Ajustada */}
       <div className="w-full max-w-3xl p-6 md:p-8 lg:p-10 space-y-6">
-        {artwork.description.map((section, index) => (
-          <div key={index} className="mb-6">
-            <p className="text-lg">{section.text}</p>
-            {section.image && (
-              <Image
-                src={section.image}
-                alt={`Imagem de ${artwork.title}`}
-                width={800}
-                height={500}
-                className="rounded-lg shadow-md"
-              />
-            )}
-          </div>
-        ))}
+        {Array.isArray(artwork.description) ? (
+          artwork.description.map((section, index) => (
+            <div key={index} className="mb-6">
+              <p className="text-lg">{section.text}</p>
+              {section.image && (
+                <Image
+                  src={section.image}
+                  alt={`Imagem de ${artwork.title}`}
+                  width={800}
+                  height={500}
+                  className="rounded-lg shadow-md"
+                />
+              )}
+            </div>
+          ))
+        ) : (
+          <p className="text-lg">Nenhuma descrição disponível.</p>
+        )}
       </div>
 
       {/* Botão de Voltar */}

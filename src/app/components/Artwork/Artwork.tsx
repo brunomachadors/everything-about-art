@@ -25,8 +25,12 @@ function Artwork({ artworkInfo }: ArtworkProps) {
           <strong>🎨 Artista:</strong> {artworkInfo.artist}
         </p>
         <p className="text-lg">
-          <strong>📅 Ano:</strong> {artworkInfo.year ?? 'Desconhecido'}
+          <strong>📅 Ano:</strong>{' '}
+          {artworkInfo.year && artworkInfo.year !== 0
+            ? artworkInfo.year
+            : 'Desconhecido'}
         </p>
+
         <p className="text-lg">
           <strong>🌍 País de Origem:</strong> {artworkInfo.origin}
         </p>

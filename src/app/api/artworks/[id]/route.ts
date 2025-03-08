@@ -38,12 +38,8 @@ export async function GET(request: Request) {
       tags: artwork.tags ?? [],
       curiosities: artwork.curiosities ?? [],
       quote: artwork.quote ?? '',
-      priceHistory: artwork.pricehistory
-        ? JSON.parse(artwork.pricehistory as string)
-        : { firstSale: 'Desconhecido', resale: 'Desconhecido' },
-      description: artwork.description
-        ? JSON.parse(artwork.description as string)
-        : [],
+      pricehistory: artwork.pricehistory,
+      description: artwork.description ?? [],
       createdAt: artwork.createdat,
     };
 
