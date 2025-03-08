@@ -30,12 +30,8 @@ export async function GET() {
       tags: ensureJSON<string[]>(artwork.tags) ?? [],
       curiosities: ensureJSON<string[]>(artwork.curiosities) ?? [],
       quote: artwork.quote ?? '',
-      priceHistory: ensureJSON<{ firstSale: string; resale: string }>(
-        artwork.pricehistory
-      ) ?? { firstSale: 'Desconhecido', resale: 'Desconhecido' },
-      description:
-        ensureJSON<{ text: string; image?: string }[]>(artwork.description) ??
-        [],
+      priceHistory: artwork.pricehistory,
+      description: artwork.description,
       createdAt: artwork.createdat,
     }));
 
@@ -87,7 +83,7 @@ export async function POST(req: Request) {
       style: body.style || 'Desconhecido',
       technique: body.technique || 'Desconhecido',
       location: body.location || 'Desconhecido',
-      description: body.description, // Prisma já aceita JSON diretamente
+      description: body.description,
       image: body.image,
       images: Array.isArray(body.images) ? body.images : [],
       tags: Array.isArray(body.tags) ? body.tags : [],
