@@ -25,7 +25,7 @@ function ArtworksPage() {
   // 🔹 Estado para paginação
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const artworksPerPage = 9; // Defina o número de obras por página
+  const artworksPerPage = 6; // Defina o número de obras por página
 
   useEffect(() => {
     async function fetchArtworks() {
