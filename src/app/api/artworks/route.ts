@@ -3,60 +3,26 @@ import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// Função para garantir que o JSON esteja no formato correto
-const ensureJSON = <T>(data: Prisma.JsonValue | null): T | null => {
-  if (typeof data === 'object' && data !== null) {
-    return data as T;
-  }
-  return null;
-};
-
-// GET - Retorna todas as obras de arte com paginação
-export async function GET(req: Request) {
+// GET - Retorna todas as obras de arte (sem paginação)
+export async function GET() {
   try {
-    const { searchParams } = new URL(req.url);
-    const page = parseInt(searchParams.get('page') || '1', 10);
-    const limit = parseInt(searchParams.get('limit') || '9', 10);
-    const offset = (page - 1) * limit;
-
-    // Contagem total de obras para calcular páginas
-    const totalArtworks = await prisma.artwork.count();
-
     const artworks = await prisma.artwork.findMany({
-      skip: offset,
-      take: limit,
+      select: {
+        id: true,
+        title: true,
+        artist: true,
+        origin: true,
+        style: true,
+        technique: true,
+        image: true,
+      },
+
+      orderBy: {
+        title: 'asc',
+      },
     });
 
-    const formattedArtworks = artworks.map((artwork) => ({
-      id: artwork.id,
-      title: artwork.title,
-      artist: artwork.artist,
-      year: artwork.year,
-      origin: artwork.origin,
-      style: artwork.style ?? '',
-      technique: artwork.technique ?? '',
-      location: artwork.location ?? '',
-      image: artwork.image,
-      images: ensureJSON<string[]>(artwork.images) ?? [],
-      tags: ensureJSON<string[]>(artwork.tags) ?? [],
-      curiosities: ensureJSON<string[]>(artwork.curiosities) ?? [],
-      quote: artwork.quote ?? '',
-      priceHistory: artwork.pricehistory,
-      description: artwork.description,
-      createdAt: artwork.createdat,
-    }));
-
-    return NextResponse.json(
-      {
-        artworks: formattedArtworks,
-        pagination: {
-          currentPage: page,
-          totalPages: Math.ceil(totalArtworks / limit),
-          totalArtworks,
-        },
-      },
-      { status: 200 }
-    );
+    return NextResponse.json({ artworks }, { status: 200 });
   } catch (error) {
     console.error('Erro ao buscar as obras de arte:', error);
     return NextResponse.json(
