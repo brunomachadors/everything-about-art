@@ -4,105 +4,109 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Pagination from '../components/Pagination';
+import Filter from '../components/Filters';
 
 interface Artwork {
   id: string;
   title: string;
   artist: string;
-  year: number | null;
   origin: string;
-  style: string | null;
   technique: string | null;
-  location: string | null;
   image: string;
 }
 
 function ArtworksPage() {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [filteredArtworks, setFilteredArtworks] = useState<Artwork[]>([]);
 
-  // 🔹 Estado para paginação
+  // 🔹 Estados para filtros e paginação
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const artworksPerPage = 6; // Defina o número de obras por página
+  const artworksPerPage = 6;
 
   useEffect(() => {
     async function fetchArtworks() {
       try {
-        setLoading(true);
-        const response = await fetch(
-          `/api/artworks?page=${currentPage}&limit=${artworksPerPage}`
-        );
+        const response = await fetch('/api/artworks');
         if (!response.ok) {
           throw new Error('Erro ao buscar as obras de arte');
         }
         const data = await response.json();
-
         setArtworks(data.artworks || []);
-        setTotalPages(data.pagination.totalPages || 1);
+        setFilteredArtworks(data.artworks || []);
       } catch (err) {
-        setError('Falha ao carregar as obras de arte.');
         console.error('Erro ao buscar as obras:', err);
-      } finally {
-        setLoading(false);
       }
     }
 
     fetchArtworks();
-  }, [currentPage]); // 🔹 Atualiza sempre que a página muda
+  }, []);
 
-  const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
+  // 🔹 Aplicar filtros dinamicamente no frontend
+  useEffect(() => {
+    let filtered = artworks;
+
+    if (searchQuery) {
+      filtered = filtered.filter(
+        (artwork) =>
+          artwork.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          artwork.artist.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     }
-  };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-lg font-bold">Carregando obras de arte...</p>
-      </div>
-    );
-  }
+    if (selectedCountry) {
+      filtered = filtered.filter(
+        (artwork) => artwork.origin === selectedCountry
+      );
+    }
 
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-lg font-bold text-red-500">{error}</p>
-      </div>
-    );
-  }
+    setFilteredArtworks(filtered);
+    setCurrentPage(1); // Voltar para a primeira página ao mudar filtros
+  }, [searchQuery, selectedCountry, artworks]);
+
+  // 🔹 Paginação no frontend
+  const startIndex = (currentPage - 1) * artworksPerPage;
+  const displayedArtworks = filteredArtworks.slice(
+    startIndex,
+    startIndex + artworksPerPage
+  );
+  const totalPages = Math.ceil(filteredArtworks.length / artworksPerPage);
 
   return (
     <div className="min-h-screen p-8 flex flex-col items-center">
       <h1 className="text-3xl font-bold mb-8">Obras de Arte</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
-        {artworks.length > 0 ? (
-          artworks.map((artwork) => (
+      {/* 🔹 Novo Componente de Filtro */}
+      <Filter
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        selectedCountry={selectedCountry}
+        setSelectedCountry={setSelectedCountry}
+        artworks={artworks}
+      />
+
+      {/* 🔹 Grid de Obras - Ajuste para centralizar */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl justify-center">
+        {displayedArtworks.length > 0 ? (
+          displayedArtworks.map((artwork) => (
             <Link
               key={artwork.id}
               href={`/artworks/${artwork.id}`}
-              className="group"
+              className="group flex justify-center"
             >
-              <div className="shadow-md overflow-hidden transition-transform transform hover:scale-105 rounded-lg">
-                {/* Imagem */}
-                <div className="w-full h-64 flex items-center justify-center">
+              <div className="shadow-md overflow-hidden transition-transform transform hover:scale-105 rounded-lg flex flex-col items-center">
+                <div className="w-72 h-96 flex items-center justify-center">
                   <Image
                     src={artwork.image}
                     width={300}
                     height={400}
                     alt={artwork.title}
-                    className="w-auto h-full max-h-64 object-contain"
+                    className="w-auto h-full max-h-96 object-contain"
                   />
                 </div>
-
-                {/* Informações */}
                 <div className="p-4 text-center">
-                  <h2 className="text-lg font-bold text-yellow-500">
-                    {artwork.title}
-                  </h2>
+                  <h2 className="text-lg font-bold">{artwork.title}</h2>
                   <p className="text-sm">{artwork.artist}</p>
                 </div>
               </div>
@@ -115,11 +119,11 @@ function ArtworksPage() {
         )}
       </div>
 
-      {/* 🔹 Adicionando o componente de paginação */}
+      {/* 🔹 Paginação */}
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={handlePageChange}
+        onPageChange={setCurrentPage}
       />
     </div>
   );
