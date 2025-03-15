@@ -28,7 +28,7 @@ const Filter: React.FC<FilterProps> = ({
 
       {/* 🌍 Filtro por país */}
       <select
-        className="px-4 py-2 border rounded bg-[var(--background)] text-[var(--foreground)] bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-[var(--foreground)] transition min-w-[250px] text-center"
+        className="px-4 py-2 border rounded bg-[var(--background)] text-[var(--foreground)] bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-[var(--foreground)] text-center"
         value={selectedCountry}
         onChange={(e) => setSelectedCountry(e.target.value)}
       >
