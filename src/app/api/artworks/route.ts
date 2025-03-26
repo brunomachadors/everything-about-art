@@ -11,8 +11,8 @@ export async function GET() {
         title: true,
         artist: true,
         origin: true,
-        style: true, // campo antigo (string)
-        styleArray: true, // campo novo (array)
+        style: true,
+        styleArray: true,
         technique: true,
         image: true,
       },
@@ -31,7 +31,6 @@ export async function GET() {
   }
 }
 
-// POST - Adiciona uma nova obra de arte ao banco
 export async function POST(req: Request) {
   try {
     console.log('🔹 Recebendo requisição POST...');
@@ -39,7 +38,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     console.log('📥 Payload recebido:', JSON.stringify(body, null, 2));
 
-    // Verificação de campos obrigatórios
     if (
       !body.id ||
       !body.title ||
@@ -59,14 +57,13 @@ export async function POST(req: Request) {
       );
     }
 
-    // Garantir que nenhum campo seja passado como null
     const newArtworkData = {
       id: body.id,
       title: body.title,
       artist: body.artist,
       year: Number(body.year),
       origin: body.origin,
-      style: body.styleArray?.[0] || 'Desconhecido', // compatibilidade com campo antigo
+      style: body.styleArray?.[0] || 'Desconhecido',
       styleArray: Array.isArray(body.styleArray) ? body.styleArray : [],
       technique: body.technique || 'Desconhecido',
       location: body.location || 'Desconhecido',

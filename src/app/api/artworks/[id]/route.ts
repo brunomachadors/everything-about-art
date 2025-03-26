@@ -6,10 +6,10 @@ const prisma = new PrismaClient();
 export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
-    const id = url.pathname.split('/').pop();
+    const id = url.pathname.split('/').filter(Boolean).pop();
 
-    if (!id) {
-      return NextResponse.json({ error: 'ID não fornecido' }, { status: 400 });
+    if (!id || typeof id !== 'string') {
+      return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
     }
 
     const artwork = await prisma.artwork.findUnique({
@@ -23,7 +23,6 @@ export async function GET(request: Request) {
       );
     }
 
-    // Formatar os dados corretamente para garantir consistência com a API
     const formattedArtwork = {
       id: artwork.id,
       title: artwork.title,

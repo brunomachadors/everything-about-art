@@ -103,6 +103,8 @@ function ArtworksPage() {
                   />
                 </div>
 
+                <h2 className="text-lg font-bold">{artwork.title}</h2>
+                <p className="text-sm">{artwork.artist}</p>
                 <div className="p-4 text-center">
                   {artwork.styleArray && artwork.styleArray.length > 0 && (
                     <div className="flex flex-wrap justify-center gap-2 mt-1">
@@ -112,8 +114,6 @@ function ArtworksPage() {
                     </div>
                   )}
                 </div>
-                <h2 className="text-lg font-bold">{artwork.title}</h2>
-                <p className="text-sm">{artwork.artist}</p>
               </div>
             </Link>
           ))

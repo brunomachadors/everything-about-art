@@ -8,7 +8,8 @@ import LoadingSpinner from '@/app/components/Loading/Loading';
 import { Artwork as ArtworkType } from '@/app/types/artworks';
 
 export default function ArtworkPage() {
-  const { id: artworkId } = useParams();
+  const { id } = useParams();
+  const artworkId = Array.isArray(id) ? id[0] : id;
 
   const [artwork, setArtwork] = useState<ArtworkType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -56,15 +57,12 @@ export default function ArtworkPage() {
 
   return (
     <main className="flex flex-col items-center min-h-screen p-8">
-      {/* Título da Obra */}
       <h1 className="text-4xl font-bold text-yellow-500 text-center mb-8">
         {artwork.title}
       </h1>
 
-      {/* Renderiza o componente Artwork */}
       <Artwork artworkInfo={artwork} />
 
-      {/* Descrição Ajustada */}
       <div className="w-full max-w-3xl p-6 md:p-8 lg:p-10 space-y-6">
         {Array.isArray(artwork.description) ? (
           artwork.description.map((section, index) => (
@@ -86,7 +84,6 @@ export default function ArtworkPage() {
         )}
       </div>
 
-      {/* Botão de Voltar */}
       <button
         onClick={() => window.history.back()}
         className="mt-8 text-yellow-500 border border-yellow-500 rounded-full px-6 py-3 hover:bg-yellow-500 hover:text-gray-900 transition"
