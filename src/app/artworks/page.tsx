@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Pagination from '../components/Pagination';
 import Filter from '../components/Filters';
+import StyleBadge from '../components/Style';
 
 interface Artwork {
   id: string;
@@ -13,13 +14,13 @@ interface Artwork {
   origin: string;
   technique: string | null;
   image: string;
+  styleArray: string[];
 }
 
 function ArtworksPage() {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [filteredArtworks, setFilteredArtworks] = useState<Artwork[]>([]);
 
-  // 🔹 Estados para filtros e paginação
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCountry, setSelectedCountry] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,7 +44,6 @@ function ArtworksPage() {
     fetchArtworks();
   }, []);
 
-  // 🔹 Aplicar filtros dinamicamente no frontend
   useEffect(() => {
     let filtered = artworks;
 
@@ -62,10 +62,9 @@ function ArtworksPage() {
     }
 
     setFilteredArtworks(filtered);
-    setCurrentPage(1); // Voltar para a primeira página ao mudar filtros
+    setCurrentPage(1);
   }, [searchQuery, selectedCountry, artworks]);
 
-  // 🔹 Paginação no frontend
   const startIndex = (currentPage - 1) * artworksPerPage;
   const displayedArtworks = filteredArtworks.slice(
     startIndex,
@@ -77,7 +76,6 @@ function ArtworksPage() {
     <div className="min-h-screen p-8 flex flex-col items-center">
       <h1 className="text-3xl font-bold mb-8">Obras de Arte</h1>
 
-      {/* 🔹 Novo Componente de Filtro */}
       <Filter
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -86,7 +84,6 @@ function ArtworksPage() {
         artworks={artworks}
       />
 
-      {/* 🔹 Grid de Obras - Ajuste para centralizar */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl justify-center">
         {displayedArtworks.length > 0 ? (
           displayedArtworks.map((artwork) => (
@@ -105,9 +102,17 @@ function ArtworksPage() {
                     className="w-auto h-full max-h-96 object-contain"
                   />
                 </div>
+
+                <h2 className="text-lg font-bold">{artwork.title}</h2>
+                <p className="text-sm">{artwork.artist}</p>
                 <div className="p-4 text-center">
-                  <h2 className="text-lg font-bold">{artwork.title}</h2>
-                  <p className="text-sm">{artwork.artist}</p>
+                  {artwork.styleArray && artwork.styleArray.length > 0 && (
+                    <div className="flex flex-wrap justify-center gap-2 mt-1">
+                      {artwork.styleArray.map((style) => (
+                        <StyleBadge key={style} label={style} />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </Link>
@@ -119,7 +124,6 @@ function ArtworksPage() {
         )}
       </div>
 
-      {/* 🔹 Paginação */}
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

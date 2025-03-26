@@ -3,7 +3,6 @@ import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// GET - Retorna todas as obras de arte (sem paginação)
 export async function GET() {
   try {
     const artworks = await prisma.artwork.findMany({
@@ -13,10 +12,10 @@ export async function GET() {
         artist: true,
         origin: true,
         style: true,
+        styleArray: true,
         technique: true,
         image: true,
       },
-
       orderBy: {
         title: 'asc',
       },
@@ -32,7 +31,6 @@ export async function GET() {
   }
 }
 
-// POST - Adiciona uma nova obra de arte ao banco
 export async function POST(req: Request) {
   try {
     console.log('🔹 Recebendo requisição POST...');
@@ -40,14 +38,13 @@ export async function POST(req: Request) {
     const body = await req.json();
     console.log('📥 Payload recebido:', JSON.stringify(body, null, 2));
 
-    // Verificação de campos obrigatórios
     if (
       !body.id ||
       !body.title ||
       !body.artist ||
       (!body.year && body.year !== null) ||
       !body.origin ||
-      !body.style ||
+      !body.styleArray ||
       !body.technique ||
       !body.location ||
       !body.description ||
@@ -60,14 +57,14 @@ export async function POST(req: Request) {
       );
     }
 
-    // Garantir que nenhum campo seja passado como null
     const newArtworkData = {
       id: body.id,
       title: body.title,
       artist: body.artist,
-      year: Number(body.year), // Garante que é um número
+      year: Number(body.year),
       origin: body.origin,
-      style: body.style || 'Desconhecido',
+      style: body.styleArray?.[0] || 'Desconhecido',
+      styleArray: Array.isArray(body.styleArray) ? body.styleArray : [],
       technique: body.technique || 'Desconhecido',
       location: body.location || 'Desconhecido',
       description: body.description,
@@ -88,22 +85,17 @@ export async function POST(req: Request) {
       JSON.stringify(newArtworkData, null, 2)
     );
 
-    // Criando a nova obra no banco de dados
     const newArtwork = await prisma.artwork.create({
       data: newArtworkData,
     });
 
-    console.log(
-      '✅ Nova obra criada com sucesso:',
-      JSON.stringify(newArtwork, null, 2)
-    );
+    console.log('✅ Nova obra criada com sucesso:');
     return NextResponse.json(newArtwork, { status: 201 });
   } catch (error: unknown) {
     console.error('❌ Erro ao criar nova obra de arte:', error);
 
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2002') {
-        console.error('⚠️ Erro: ID já existe no banco de dados.');
         return NextResponse.json(
           { error: 'Já existe uma obra com esse ID.' },
           { status: 400 }

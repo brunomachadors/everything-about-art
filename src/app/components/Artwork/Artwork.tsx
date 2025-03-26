@@ -30,10 +30,18 @@ function Artwork({ artworkInfo }: ArtworkProps) {
             ? artworkInfo.year
             : 'Desconhecido'}
         </p>
-
         <p className="text-lg">
           <strong>🌍 País de Origem:</strong> {artworkInfo.origin}
         </p>
+
+        {/* Novo campo de estilos */}
+        <p className="text-lg">
+          <strong>🧩 Estilo:</strong>{' '}
+          {artworkInfo.styleArray && artworkInfo.styleArray.length > 0
+            ? artworkInfo.styleArray.join(', ')
+            : 'Desconhecido'}
+        </p>
+
         <p className="text-lg">
           <strong>🖌️ Técnica:</strong> {artworkInfo.technique || 'Desconhecida'}
         </p>
