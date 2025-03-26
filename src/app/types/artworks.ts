@@ -5,6 +5,7 @@ export interface Artwork {
   year: number | null;
   origin: string;
   style: string | null;
+  styleArray: string[];
   technique: string | null;
   location: string | null;
   image: string;

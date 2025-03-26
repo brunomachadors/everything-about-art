@@ -30,7 +30,7 @@ export async function GET(request: Request) {
       artist: artwork.artist,
       year: artwork.year,
       origin: artwork.origin,
-      style: artwork.style ?? '',
+      styleArray: artwork.styleArray ?? [],
       technique: artwork.technique ?? '',
       location: artwork.location ?? '',
       image: artwork.image,
