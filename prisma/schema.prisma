@@ -8,22 +8,39 @@ datasource db {
 }
 
 model artwork {
-  id           String   @id @default(uuid())          // ✅ ID com UUID automático
-  title        String                                // ✅ Título obrigatório
-  artist       String                                // ✅ Artista obrigatório
-  year         Int                                   // ✅ Ano como inteiro
-  origin       String                                // ✅ País obrigatório
-  style        String?                               // ✅ Campo antigo (pode ser removido depois)
-  styleArray   String[] @default([])                 // ✅ Campo novo como array, com valor padrão
-  technique    String?                               // ✅ Técnica opcional
-  location     String?                               // ✅ Local opcional
-  description  Json                                  // ✅ Descrição (texto/imagens estruturadas)
-  image        String                                // ✅ URL da imagem obrigatória
-  images       String[]                              // ✅ Galeria de imagens
-  tags         String[]                              // ✅ Tags extras
-  curiosities  String[]                              // ✅ Curiosidades da obra
-  quote        String?                               // ✅ Frase icônica opcional
-  pricehistory Json                                  // ✅ Histórico de preço
-  createdat    DateTime @default(now())              // ✅ Timestamp de criação
+  id           String   @id @default(uuid())
+  title        String
+  artist       String
+  year         Int
+  origin       String
+  style        String?
+  styleArray   String[] @default([])
+  technique    String?
+  location     String?
+  description  Json
+  image        String
+  images       String[]
+  tags         String[]
+  curiosities  String[]
+  quote        String?
+  pricehistory Json
+  createdat    DateTime @default(now())
+  authorId     String?
+  author       artist?  @relation(fields: [authorId], references: [id])
+}
+
+model artist {
+  id           String   @id
+  name         String
+  image        String
+  bio          Json
+  fullName     String
+  birthDate    String
+  deathDate    String?
+  nationality  String
+  movements    String[] @default([])
+  occupations  String[] @default([])
+  createdAt    DateTime @default(now())
+  artworks     artwork[]
 }
 
