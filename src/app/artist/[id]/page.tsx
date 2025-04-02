@@ -77,7 +77,7 @@ export default function ArtistDetailPage() {
             className="rounded-lg object-cover"
           />
         </div>
-        <div className="w-full md:w-1/2 space-y-3 text-base text-gray-700 dark:text-gray-300">
+        <div className="w-full md:w-1/2 space-y-3 text-base">
           <p>
             <strong>Nome completo:</strong> {artist.fullName}
           </p>
@@ -108,9 +108,7 @@ export default function ArtistDetailPage() {
       <div className="w-full max-w-3xl p-6 md:p-8 lg:p-10 space-y-6">
         {artist.bio.map((section, index) => (
           <div key={index} className="space-y-3">
-            <p className="text-lg text-justify text-gray-800 dark:text-gray-200">
-              {section.text}
-            </p>
+            <p className="text-lg text-justify">{section.text}</p>
             {section.image && (
               <Image
                 src={section.image}
