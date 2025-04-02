@@ -96,7 +96,7 @@ export default function ArtistsPage() {
                   <h2 className="text-lg font-bold text-yellow-500">
                     {artist.name}
                   </h2>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-3">
+                  <p className="text-sm line-clamp-3">
                     {artist.bio?.[0]?.text}
                   </p>
                   <div className="flex flex-wrap gap-2 m-4 items-center justify-center">
@@ -109,9 +109,7 @@ export default function ArtistsPage() {
             </Link>
           ))
         ) : (
-          <p className="text-lg text-gray-600 dark:text-gray-300 mt-8">
-            Nenhum artista encontrado.
-          </p>
+          <p className="text-lg">Nenhum artista encontrado.</p>
         )}
       </div>
 

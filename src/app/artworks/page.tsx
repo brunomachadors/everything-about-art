@@ -118,9 +118,7 @@ function ArtworksPage() {
             </Link>
           ))
         ) : (
-          <p className="text-lg font-bold text-gray-500">
-            Nenhuma obra encontrada.
-          </p>
+          <p className="text-lg font-bold">Nenhuma obra encontrada.</p>
         )}
       </div>
 
