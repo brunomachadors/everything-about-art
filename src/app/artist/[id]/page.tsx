@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import StyleBadge from '@/app/components/Style';
@@ -34,6 +34,9 @@ interface Artist {
 
 export default function ArtistDetailPage() {
   const { id } = useParams();
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page') || '1';
+
   const [artist, setArtist] = useState<Artist | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -152,7 +155,7 @@ export default function ArtistDetailPage() {
       )}
 
       <Link
-        href="/artist"
+        href={`/artist?page=${page}`}
         className="mt-12 text-yellow-500 border border-yellow-500 rounded-full px-6 py-3 hover:bg-yellow-500 hover:text-black transition"
       >
         Voltar para Artistas

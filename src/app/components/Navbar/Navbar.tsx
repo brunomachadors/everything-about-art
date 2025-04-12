@@ -40,7 +40,7 @@ export default function Navbar() {
           OBRAS
         </Link>
         <Link
-          href="/artists"
+          href="/artist"
           onClick={closeMenu}
           className="hover:text-yellow-500 w-full text-center py-2"
         >
