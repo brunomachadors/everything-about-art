@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Pagination from '../components/Pagination';
 import Filter from '../components/Filters';
 import StyleBadge from '../components/Style';
+import LoadingSpinner from '../components/Loading/Loading';
 
 interface Artwork {
   id: string;
@@ -25,9 +26,11 @@ function ArtworksPage() {
   const [selectedCountry, setSelectedCountry] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
   const artworksPerPage = 6;
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchArtworks() {
+      setLoading(true);
       try {
         const response = await fetch('/api/artworks');
         if (!response.ok) {
@@ -36,6 +39,8 @@ function ArtworksPage() {
         const data = await response.json();
         setArtworks(data.artworks || []);
         setFilteredArtworks(data.artworks || []);
+
+        setLoading(false);
       } catch (err) {
         console.error('Erro ao buscar as obras:', err);
       }
@@ -72,6 +77,14 @@ function ArtworksPage() {
   );
   const totalPages = Math.ceil(filteredArtworks.length / artworksPerPage);
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen p-8 flex flex-col items-center">
       <h1 className="text-3xl font-bold mb-8">Obras de Arte</h1>
@@ -100,6 +113,7 @@ function ArtworksPage() {
                     height={400}
                     alt={artwork.title}
                     className="w-auto h-full max-h-96 object-contain"
+                    priority
                   />
                 </div>
 

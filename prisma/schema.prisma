@@ -25,7 +25,7 @@ model artwork {
   quote        String?
   pricehistory Json
   createdat    DateTime @default(now())
-  authorId     String?
+  authorId     String
   author       artist?  @relation(fields: [authorId], references: [id])
 }
 
