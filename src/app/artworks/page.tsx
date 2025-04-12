@@ -7,6 +7,7 @@ import Pagination from '../components/Pagination';
 import Filter from '../components/Filters';
 import StyleBadge from '../components/Style';
 import LoadingSpinner from '../components/Loading/Loading';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 interface Artwork {
   id: string;
@@ -21,12 +22,14 @@ interface Artwork {
 function ArtworksPage() {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [filteredArtworks, setFilteredArtworks] = useState<Artwork[]>([]);
-
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCountry, setSelectedCountry] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
-  const artworksPerPage = 6;
   const [loading, setLoading] = useState(true);
+  const artworksPerPage = 6;
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchArtworks() {
@@ -40,14 +43,24 @@ function ArtworksPage() {
         setArtworks(data.artworks || []);
         setFilteredArtworks(data.artworks || []);
 
-        setLoading(false);
+        const pageFromQuery = searchParams.get('page');
+        const pageFromSession = sessionStorage.getItem('artworksPage');
+        const resolvedPage = pageFromQuery
+          ? parseInt(pageFromQuery)
+          : pageFromSession
+          ? parseInt(pageFromSession)
+          : 1;
+
+        setCurrentPage(resolvedPage);
       } catch (err) {
         console.error('Erro ao buscar as obras:', err);
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchArtworks();
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
     let filtered = artworks;
@@ -67,8 +80,13 @@ function ArtworksPage() {
     }
 
     setFilteredArtworks(filtered);
-    setCurrentPage(1);
   }, [searchQuery, selectedCountry, artworks]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    sessionStorage.setItem('artworksPage', String(page));
+    router.push(`/artworks?page=${page}`);
+  };
 
   const startIndex = (currentPage - 1) * artworksPerPage;
   const displayedArtworks = filteredArtworks.slice(
@@ -102,7 +120,7 @@ function ArtworksPage() {
           displayedArtworks.map((artwork) => (
             <Link
               key={artwork.id}
-              href={`/artworks/${artwork.id}`}
+              href={`/artworks/${artwork.id}?page=${currentPage}`}
               className="group flex justify-center"
             >
               <div className="shadow-md overflow-hidden transition-transform transform hover:scale-105 rounded-lg flex flex-col items-center">
@@ -139,7 +157,7 @@ function ArtworksPage() {
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={setCurrentPage}
+        onPageChange={handlePageChange}
       />
     </div>
   );
