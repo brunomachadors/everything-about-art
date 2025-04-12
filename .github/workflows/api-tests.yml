@@ -27,9 +27,3 @@ jobs:
       - name: 🚀 Run API Tests
         run: |
           newman run postman/collection.json
-
-      - name: 📤 Upload HTML Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: newman-html-report
-          path: newman-report.html
