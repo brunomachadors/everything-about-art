@@ -22,6 +22,8 @@ export default function ArtworkPage() {
     image?: string;
   } | null>(null);
 
+  const page = searchParams.get('page') || '1';
+
   useEffect(() => {
     async function fetchArtwork() {
       try {
@@ -126,12 +128,12 @@ export default function ArtworkPage() {
         </div>
       )}
 
-      <button
-        onClick={() => window.history.back()}
+      <Link
+        href={`/artworks?page=${page}`}
         className="mt-12 text-yellow-500 border border-yellow-500 rounded-full px-6 py-3 hover:bg-yellow-500 hover:text-black transition"
       >
-        Voltar para Obras
-      </button>
+        Voltar para Artistas
+      </Link>
     </main>
   );
 }
