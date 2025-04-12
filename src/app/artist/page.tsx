@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Pagination from '../components/Pagination';
 import StyleBadge from '../components/Style';
+import LoadingSpinner from '@/app/components/Loading/Loading';
 
 interface Artist {
   id: string;
@@ -20,14 +21,17 @@ export default function ArtistsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const artistsPerPage = 6;
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchArtists() {
       try {
+        setIsLoading(true);
         const response = await fetch('/api/artists');
         const data = await response.json();
         setArtists(data.artists || []);
         setFilteredArtists(data.artists || []);
+        setIsLoading(false);
       } catch (err) {
         console.error('Erro ao buscar artistas:', err);
       }
@@ -60,6 +64,14 @@ export default function ArtistsPage() {
     startIndex + artistsPerPage
   );
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <main className="min-h-screen p-8 flex flex-col items-center">
       <h1 className="text-3xl font-bold mb-8">Artistas</h1>
@@ -90,6 +102,7 @@ export default function ArtistsPage() {
                     height={300}
                     alt={artist.name}
                     className="rounded-md object-contain max-h-72"
+                    priority
                   />
                 </div>
                 <div className="p-4 text-center">

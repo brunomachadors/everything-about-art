@@ -16,4 +16,9 @@ export interface Artwork {
   quote?: string | null;
   description: { text: string; image?: string }[];
   createdat: Date;
+  author?: {
+    id: string;
+    name: string;
+    image?: string;
+  };
 }

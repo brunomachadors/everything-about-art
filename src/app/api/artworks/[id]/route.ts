@@ -14,6 +14,15 @@ export async function GET(request: Request) {
 
     const artwork = await prisma.artwork.findUnique({
       where: { id },
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+          },
+        },
+      },
     });
 
     if (!artwork) {
@@ -40,6 +49,7 @@ export async function GET(request: Request) {
       pricehistory: artwork.pricehistory,
       description: artwork.description ?? [],
       createdAt: artwork.createdat,
+      author: artwork.author ?? null,
     };
 
     return NextResponse.json(formattedArtwork, { status: 200 });
