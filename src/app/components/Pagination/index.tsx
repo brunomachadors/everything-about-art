@@ -31,12 +31,17 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className="flex items-center justify-center gap-2 mt-8">
+    <div
+      className="flex items-center justify-center gap-2 mt-8"
+      role="navigation"
+      aria-label="Paginação"
+    >
       {/* Botão Anterior */}
       {currentPage > 1 && (
         <button
           onClick={() => onPageChange(currentPage - 1)}
-          className="px-3 py-2 text-[var(--foreground)] bg-[var(--background)] hover:bg-[var(--foreground)] hover:text-[var(--background)] transition"
+          className="px-3 py-2 rounded border border-[var(--foreground)] text-[var(--foreground)] bg-[var(--background)] hover:bg-[var(--foreground)] hover:text-[var(--background)] transition"
+          aria-label="Página anterior"
         >
           &lt;
         </button>
@@ -47,6 +52,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           key={page}
           onClick={() => onPageChange(page)}
+          aria-current={page === currentPage ? 'page' : undefined}
           className={`px-4 py-2 rounded border border-[var(--foreground)] transition ${
             page === currentPage
               ? 'bg-[var(--foreground)] text-[var(--background)] font-bold'
@@ -61,7 +67,8 @@ const Pagination: React.FC<PaginationProps> = ({
       {currentPage < totalPages && (
         <button
           onClick={() => onPageChange(currentPage + 1)}
-          className="px-3 py-2 text-[var(--foreground)] bg-[var(--background)] hover:bg-[var(--foreground)] hover:text-[var(--background)] transition"
+          className="px-3 py-2 rounded border border-[var(--foreground)] text-[var(--foreground)] bg-[var(--background)] hover:bg-[var(--foreground)] hover:text-[var(--background)] transition"
+          aria-label="Próxima página"
         >
           &gt;
         </button>

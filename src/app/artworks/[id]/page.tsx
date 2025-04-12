@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,6 +10,7 @@ import { Artwork as ArtworkType } from '@/app/types/artworks';
 
 export default function ArtworkPage() {
   const { id } = useParams();
+  const searchParams = useSearchParams();
   const artworkId = Array.isArray(id) ? id[0] : id;
 
   const [artwork, setArtwork] = useState<ArtworkType | null>(null);
@@ -21,12 +22,20 @@ export default function ArtworkPage() {
     image?: string;
   } | null>(null);
 
+  const page = searchParams.get('page') || '1';
+
   useEffect(() => {
     async function fetchArtwork() {
       try {
         setIsLoading(true);
-        const response = await fetch(`/api/artworks/${artworkId}`);
 
+        // ✅ Salva a página atual vinda da query string
+        const pageFromQuery = searchParams.get('page');
+        if (pageFromQuery) {
+          sessionStorage.setItem('artworksPage', pageFromQuery);
+        }
+
+        const response = await fetch(`/api/artworks/${artworkId}`);
         if (!response.ok) {
           throw new Error('Obra de arte não encontrada.');
         }
@@ -51,7 +60,7 @@ export default function ArtworkPage() {
     if (artworkId) {
       fetchArtwork();
     }
-  }, [artworkId]);
+  }, [artworkId, searchParams]);
 
   if (isLoading) {
     return (
@@ -119,13 +128,12 @@ export default function ArtworkPage() {
         </div>
       )}
 
-      {/* Botão de voltar */}
-      <button
-        onClick={() => window.history.back()}
+      <Link
+        href={`/artworks?page=${page}`}
         className="mt-12 text-yellow-500 border border-yellow-500 rounded-full px-6 py-3 hover:bg-yellow-500 hover:text-black transition"
       >
-        Voltar para Obras
-      </button>
+        Voltar para Artistas
+      </Link>
     </main>
   );
 }
