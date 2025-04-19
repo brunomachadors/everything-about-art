@@ -17,6 +17,8 @@ model artwork {
   styleArray   String[] @default([])
   technique    String?
   location     String?
+  locationId   String?
+  locationRef  location? @relation(fields: [locationId], references: [id])
   description  Json
   image        String
   images       String[]
@@ -28,6 +30,7 @@ model artwork {
   authorId     String
   author       artist?  @relation(fields: [authorId], references: [id])
 }
+
 
 model artist {
   id           String   @id
@@ -42,5 +45,25 @@ model artist {
   occupations  String[] @default([])
   createdAt    DateTime @default(now())
   artworks     artwork[]
+}
+
+model location {
+  id          String        @id @default(uuid())
+  name        String
+  image       String
+  type        LocationType
+  city        String
+  country     String
+  address     String
+  pricePolicy Json
+  description Json
+  artworks    artwork[]
+  createdAt   DateTime      @default(now())
+}
+
+
+enum LocationType {
+  MUSEUM
+  STREET_ART
 }
 
