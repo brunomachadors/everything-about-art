@@ -47,6 +47,14 @@ export default function Museum() {
   const [museum, setMuseum] = useState<MuseumData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  function formatCamelCase(text: string) {
+    return text
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/([a-zA-Z])([0-9])/g, '$1 $2')
+      .replace(/([0-9])([a-zA-Z])/g, '$1 $2')
+      .replace(/^./, (str) => str.toUpperCase());
+  }
+
   useEffect(() => {
     if (!id) return;
 
@@ -120,7 +128,7 @@ export default function Museum() {
                 {Object.entries(museum.pricePolicy.entradaGeral).map(
                   ([categoria, valor], index) => (
                     <li key={index}>
-                      <strong>{categoria}:</strong> {valor}
+                      <strong>{formatCamelCase(categoria)}:</strong> {valor}
                     </li>
                   )
                 )}
