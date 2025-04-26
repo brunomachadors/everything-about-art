@@ -38,6 +38,7 @@ export async function POST(req: Request) {
     console.log('📥 Payload recebido:', JSON.stringify(body, null, 2));
 
     const requiredFields = [
+      'id',
       'name',
       'type',
       'city',
@@ -60,6 +61,7 @@ export async function POST(req: Request) {
 
     const newLocation = await prisma.location.create({
       data: {
+        id: body.id,
         name: body.name,
         type: body.type,
         city: body.city,

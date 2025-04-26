@@ -48,7 +48,7 @@ model artist {
 }
 
 model location {
-  id          String        @id @default(uuid())
+  id          String        @id
   name        String
   image       String
   type        LocationType
