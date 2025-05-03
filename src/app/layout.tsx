@@ -21,7 +21,7 @@ export default function RootLayout({
         <Header />
         {children}
         <footer className="w-full py-4 text-center text-sm">
-          FOOTER - Tudo sobre arte © {new Date().getFullYear()}
+          EVERY THING ABOUT ART © {new Date().getFullYear()}
         </footer>
       </body>
     </html>
