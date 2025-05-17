@@ -61,7 +61,7 @@ export default function Navbar() {
           ARTE URBANA
         </Link>
         <Link
-          href="/about-us"
+          href="/about"
           onClick={closeMenu}
           className="hover:text-yellow-500 w-full text-center py-2"
         >
