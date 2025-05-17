@@ -203,10 +203,10 @@ export default function Museum() {
       )}
 
       <Link
-        href={`/museum`}
+        href={`/street-art`}
         className="mt-12 text-yellow-500 border border-yellow-500 rounded-full px-6 py-3 hover:bg-yellow-500 hover:text-black transition"
       >
-        Voltar para Museus
+        Voltar para Arte Urbana
       </Link>
     </main>
   );
