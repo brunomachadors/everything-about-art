@@ -1,10 +1,11 @@
+// components/Location/index.tsx
+
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-
 import LoadingSpinner from '@/app/components/Loading/Loading';
 import Pagination from '../Pagination';
 
@@ -18,7 +19,11 @@ interface Location {
   image: string;
 }
 
-export default function LocationsContent() {
+interface Props {
+  type: 'MUSEUM' | 'STREET_ART';
+}
+
+export default function LocationsContent({ type }: Props) {
   const searchParams = useSearchParams();
   const initialPage = parseInt(searchParams.get('page') || '1', 10);
 
@@ -35,8 +40,12 @@ export default function LocationsContent() {
         setIsLoading(true);
         const response = await fetch('/api/location');
         const data = await response.json();
-        setLocations(data.locations || []);
-        setFilteredLocations(data.locations || []);
+
+        const all = data.locations || [];
+        const filteredByType = all.filter((loc: Location) => loc.type === type);
+
+        setLocations(filteredByType);
+        setFilteredLocations(filteredByType);
         setIsLoading(false);
       } catch (err) {
         console.error('Erro ao buscar locais:', err);
@@ -44,7 +53,7 @@ export default function LocationsContent() {
     }
 
     fetchLocations();
-  }, []);
+  }, [type]);
 
   useEffect(() => {
     const filtered = locations.filter((loc) =>
@@ -88,7 +97,7 @@ export default function LocationsContent() {
       <div className="w-full flex justify-center mb-6">
         <input
           type="text"
-          placeholder="Buscar museu ou local..."
+          placeholder={`Buscar ${type === 'MUSEUM' ? 'museu' : 'local'}...`}
           className="px-4 py-2 border rounded bg-[var(--background)] text-[var(--foreground)] bg-opacity-50 placeholder-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--foreground)] transition w-full max-w-md"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -100,7 +109,9 @@ export default function LocationsContent() {
           displayedLocations.map((location) => (
             <Link
               key={location.id}
-              href={`/museum/${location.id}?page=${currentPage}`}
+              href={`/${type === 'MUSEUM' ? 'museum' : 'street-art'}/${
+                location.id
+              }?page=${currentPage}`}
               className="group flex justify-center"
             >
               <div className="shadow-md overflow-hidden transition-transform transform hover:scale-105 rounded-lg flex flex-col items-center">
@@ -126,7 +137,7 @@ export default function LocationsContent() {
                     {location.city}, {location.country}
                   </p>
                   <p className="text-xs mt-2 font-medium text-black bg-yellow-500 rounded-full px-3 py-1">
-                    {location.type === 'MUSEUM' ? 'Museu' : 'Arte Urbana'}
+                    {type === 'MUSEUM' ? 'Museu' : 'Arte Urbana'}
                   </p>
                 </div>
               </div>

@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "60d7a9e6-ab07-499a-ad6f-d27c9ffd58f1",
+		"_postman_id": "770b2392-ac84-4a7a-82fb-2c4601d89d27",
 		"name": "Regression",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "38876408"
+		"_exporter_id": "3105562",
+		"_collection_link": "https://art555-9654.postman.co/workspace/EverythingAboutArt~e0f850b5-dcbb-4f4d-bb84-9d627205e6f3/collection/3105562-770b2392-ac84-4a7a-82fb-2c4601d89d27?action=share&source=collection_link&creator=3105562"
 	},
 	"item": [
 		{
@@ -51,7 +52,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Validate location\", function () {  \r",
-									"    pm.expect(jsonData.location).to.eql(\"Café Martinho da Arcada, Lisboa\");\r",
+									"    pm.expect(jsonData.location).to.eql(\"Centro de Arte Moderna da Fundação Calouste Gulbenkian, Lisboa\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate image\", function () {  \r",
