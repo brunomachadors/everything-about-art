@@ -1,12 +1,9 @@
-// components/Location/index.tsx
-
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import LoadingSpinner from '@/app/components/Loading/Loading';
+import LoadingSpinner from '../Loading/Loading';
 import Pagination from '../Pagination';
 
 interface Location {
@@ -21,16 +18,18 @@ interface Location {
 
 interface Props {
   type: 'MUSEUM' | 'STREET_ART';
+  currentPage: number;
+  onPageChange: (page: number) => void;
 }
 
-export default function LocationsContent({ type }: Props) {
-  const searchParams = useSearchParams();
-  const initialPage = parseInt(searchParams.get('page') || '1', 10);
-
+export default function LocationsPageImpl({
+  type,
+  currentPage,
+  onPageChange,
+}: Props) {
   const [locations, setLocations] = useState<Location[]>([]);
   const [filteredLocations, setFilteredLocations] = useState<Location[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(initialPage);
   const [isLoading, setIsLoading] = useState(true);
   const perPage = 6;
 
@@ -40,7 +39,6 @@ export default function LocationsContent({ type }: Props) {
         setIsLoading(true);
         const response = await fetch('/api/location');
         const data = await response.json();
-
         const all = data.locations || [];
         const filteredByType = all.filter((loc: Location) => loc.type === type);
 
@@ -60,29 +58,14 @@ export default function LocationsContent({ type }: Props) {
       loc.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredLocations(filtered);
-    setCurrentPage(1);
   }, [searchQuery, locations]);
 
+  const displayedLocations = useMemo(() => {
+    const start = (currentPage - 1) * perPage;
+    return filteredLocations.slice(start, start + perPage);
+  }, [filteredLocations, currentPage]);
+
   const totalPages = Math.ceil(filteredLocations.length / perPage);
-
-  useEffect(() => {
-    if (currentPage > totalPages) {
-      setCurrentPage(totalPages || 1);
-    }
-  }, [currentPage, totalPages]);
-
-  const startIndex = (currentPage - 1) * perPage;
-  const displayedLocations = filteredLocations.slice(
-    startIndex,
-    startIndex + perPage
-  );
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    const url = new URL(window.location.href);
-    url.searchParams.set('page', String(page));
-    window.history.pushState({}, '', url.toString());
-  };
 
   if (isLoading) {
     return (
@@ -152,7 +135,7 @@ export default function LocationsContent({ type }: Props) {
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={handlePageChange}
+          onPageChange={onPageChange}
         />
       )}
     </main>

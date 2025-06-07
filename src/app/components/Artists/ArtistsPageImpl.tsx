@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-import LoadingSpinner from '@/app/components/Loading/Loading';
+import LoadingSpinner from '../Loading/Loading';
 import StyleBadge from '../Style';
 import Pagination from '../Pagination';
 
@@ -17,14 +15,15 @@ interface Artist {
   movements: string[];
 }
 
-export default function ArtistsContent() {
-  const searchParams = useSearchParams();
-  const initialPage = parseInt(searchParams.get('page') || '1', 10);
+interface Props {
+  currentPage: number;
+  onPageChange: (page: number) => void;
+}
 
+export default function ArtistsPageImpl({ currentPage, onPageChange }: Props) {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [filteredArtists, setFilteredArtists] = useState<Artist[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(initialPage);
   const [isLoading, setIsLoading] = useState(true);
   const artistsPerPage = 6;
 
@@ -49,32 +48,15 @@ export default function ArtistsContent() {
     const filtered = artists.filter((artist) =>
       artist.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-
     setFilteredArtists(filtered);
-    setCurrentPage(1); // Reinicia para a primeira página ao aplicar um filtro
   }, [searchQuery, artists]);
 
+  const displayedArtists = useMemo(() => {
+    const startIndex = (currentPage - 1) * artistsPerPage;
+    return filteredArtists.slice(startIndex, startIndex + artistsPerPage);
+  }, [filteredArtists, currentPage]);
+
   const totalPages = Math.ceil(filteredArtists.length / artistsPerPage);
-
-  useEffect(() => {
-    if (currentPage > totalPages) {
-      setCurrentPage(totalPages || 1);
-    }
-  }, [currentPage, totalPages]);
-
-  const startIndex = (currentPage - 1) * artistsPerPage;
-  const displayedArtists = filteredArtists.slice(
-    startIndex,
-    startIndex + artistsPerPage
-  );
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    // Atualiza a URL com o número da página atual
-    const url = new URL(window.location.href);
-    url.searchParams.set('page', String(page));
-    window.history.pushState({}, '', url.toString());
-  };
 
   if (isLoading) {
     return (
@@ -140,7 +122,7 @@ export default function ArtistsContent() {
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={handlePageChange}
+          onPageChange={onPageChange}
         />
       )}
     </main>
