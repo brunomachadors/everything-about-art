@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -46,6 +46,9 @@ export default function Museum() {
   const { id } = useParams();
   const [museum, setMuseum] = useState<MuseumData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page') || '1';
 
   function formatCamelCase(text: string) {
     return text
@@ -203,7 +206,7 @@ export default function Museum() {
       )}
 
       <Link
-        href={`/museum`}
+        href={`/museum?page=${page}`}
         className="mt-12 text-yellow-500 border border-yellow-500 rounded-full px-6 py-3 hover:bg-yellow-500 hover:text-black transition"
       >
         Voltar para Museus
