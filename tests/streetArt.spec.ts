@@ -13,9 +13,6 @@ test("Avenida Infante Santo", async ({ page }) => {
     page.getByRole("link", { name: "Avenida Infante Santo" })
   ).toBeVisible();
   await page.getByRole("link", { name: "Avenida Infante Santo" }).click();
-  await expect(
-    page.getByText("📍 Localização: Lisboa, Portugal")
-  ).toBeVisible();
   await expect(page.getByText("📍 Localização: Lisboa, Portugal")).toHaveText(
     "📍 Localização: " + jsonData.city + ", " + jsonData.country
   );
